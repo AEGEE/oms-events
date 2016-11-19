@@ -8,7 +8,7 @@ var futureDate = function(offset) {
 	var retval = new Date();
 	retval.setDate(retval.getDate() + offset);
 	return retval;
-}
+};
 
 exports.populate = function(callback) {
 	var now = new Date();
@@ -30,7 +30,7 @@ exports.populate = function(callback) {
 			first_name: "Cave",
 			last_name: "Johnson",
 			foreign_id: "1"
-		}],
+		}]
 	});
 
 	event1.save(function(err, event) {
@@ -54,17 +54,17 @@ exports.populate = function(callback) {
 			application_deadline: futureDate(14),
 			application_status: "open",
 			application_fields : [
-				{name: "Motivation"}, 
-				{name: "Allergies"}, 
-				{name: "Disabilities"}, 
-				{name: "TShirt-Size"}, 
+				{name: "Motivation"},
+				{name: "Allergies"},
+				{name: "Disabilities"},
+				{name: "TShirt-Size"},
 				{name: "Meaning of Life"}
 			],
 			organizers: [{
 				first_name: "Vincent",
 				last_name: "Vega",
 				foreign_id: "2"
-			}],
+			}]
 		});
 
 
@@ -88,10 +88,10 @@ exports.populate = function(callback) {
 				organizers: [{foreign_id: "cave.johnson"}],
 				application_fields : [
 						{name: "Motivation"},
-						{name: "TShirt-Size"}, 
+						{name: "TShirt-Size"},
 						{name: "Meaning of Life"},
 						{name: "Allergies"}
-				],
+				]
 			});
 
 			event3.save(function(err, event3) {
@@ -128,7 +128,7 @@ exports.populate = function(callback) {
 						application_status: "requesting",
 						application: []
 					}
-				]
+				];
 
 				event3.save(function(err) {
 					if(err) {
@@ -151,4 +151,4 @@ exports.populate = function(callback) {
 
 exports.clear = function() {
 	Event.collection.drop();
-}
+};

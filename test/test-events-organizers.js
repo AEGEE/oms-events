@@ -24,7 +24,7 @@ module.exports = function() {
 			type: "non-statutory",
 			max_participants: 22,
 			application_deadline: "2015-11-30",
-			organizers: [{foreign_id: "vincent.vega"}],
+			organizers: [{foreign_id: "vincent.vega"}]
 		});
 
 		event1.save(function(err) {
@@ -38,13 +38,13 @@ module.exports = function() {
 				max_participants: 300,
 				application_deadline: "2017-01-01",
 				application_fields : [
-					{name: "Motivation"}, 
-					{name: "Allergies"}, 
-					{name: "Disabilities"}, 
-					{name: "TShirt-Size"}, 
+					{name: "Motivation"},
+					{name: "Allergies"},
+					{name: "Disabilities"},
+					{name: "TShirt-Size"},
 					{name: "Meaning of Life"}
 				],
-				organizers: [{foreign_id: "vincent.vega"}],
+				organizers: [{foreign_id: "vincent.vega"}]
 			});
 
 			event2.save(function(err) {
@@ -110,7 +110,7 @@ module.exports = function() {
 								done();
 							});
 					});
-			});	
+			});
 	});
 
 	it('should not allow to empty the organizers list on /single/id/organizers PUT', function(done) {
@@ -125,7 +125,7 @@ module.exports = function() {
 						res.should.have.status(409);
 						done();
 					});
-			});	
+			});
 	});
 
 	it('should return a validation error on malformed /single/id/organizers PUT', function(done) {
@@ -143,6 +143,6 @@ module.exports = function() {
 						res.should.have.status(409);
 						done();
 					});
-			});	
+			});
 	});
-}
+};

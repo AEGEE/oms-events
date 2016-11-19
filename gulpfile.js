@@ -17,7 +17,7 @@ gulp.task('frontend', function () {
     //var staticProxy = proxy('/static', {
     //	target: 'http://localhost:8081/'
     //});
-	
+
     gulp.src('./frontend')
 		.pipe(webserver({
 			host: '0.0.0.0',
@@ -37,8 +37,8 @@ gulp.task('backend', function () {
     //supervisor("lib/server.js");
     // Nodemon takes less than 20% cpu usage
     var bunyan;
-    nodemon({ 
-        script: 'lib/server.js', 
+    nodemon({
+        script: 'lib/server.js',
         ext: 'js json',
     	watch: ['lib', 'lib/config'],
         stdout: false
@@ -47,18 +47,18 @@ gulp.task('backend', function () {
     .on('readable', function() {
 
         // free memory
-        bunyan && bunyan.kill()
+        bunyan && bunyan.kill();
 
         bunyan = spawn('./node_modules/bunyan/bin/bunyan', [
             '--output', 'short',
             '--color'
-        ])
+        ]);
 
-        bunyan.stdout.pipe(process.stdout)
-        bunyan.stderr.pipe(process.stderr)
+        bunyan.stdout.pipe(process.stdout);
+        bunyan.stderr.pipe(process.stderr);
 
-        this.stdout.pipe(bunyan.stdin)
-        this.stderr.pipe(bunyan.stdin)
+        this.stdout.pipe(bunyan.stdin);
+        this.stderr.pipe(bunyan.stdin);
     });
 });
 

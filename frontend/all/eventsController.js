@@ -11,7 +11,7 @@
 		.controller('ListingController', ListingController)
 		.controller('MineController', MineController)
 		.controller('SingleController', SingleController)
-		.controller('ApplyController', ApplyController)
+		.controller('ApplyController', ApplyController);
 
 	/** @ngInject */
 	function config($stateProvider)
@@ -59,14 +59,14 @@
 			});
 	}
 
-	function ListingController($scope, $http, $timeout) {        
+	function ListingController($scope, $http, $timeout) {
 		$scope.typequery={
 			statutory: true,
 			non_statutory: true,
 			su: true,
 			local: true
 		};
-		$scope.currentTime = Date.now() // get the current time for the timeline
+		$scope.currentTime = Date.now(); // get the current time for the timeline
 
 		// Fetch events from backend
 		//$('#loadingOverlay').show();
@@ -74,8 +74,7 @@
 			$scope.events = response;
 			//$('#loadingOverlay').hide();
 		});
-	
-		
+
 		// Search callback to enable searching in name and description only
 		$scope.search = function (row) {
 			var status_types = [];
@@ -131,7 +130,7 @@
 		});
 		// And also get all those the user has applied to
 		$http.get(apiUrl + 'mine/byApplication').success(function(response) {
-			$scope.events.push.apply($scope.events, response);		
+			$scope.events.push.apply($scope.events, response);
 		});
 
 	}
@@ -141,7 +140,7 @@
 
 		// Fetch event from backend
 		$http.get(apiUrl + 'single/' + $stateParams.id).success( function(res) {
-			$scope.event = res; 
+			$scope.event = res;
 		});
 	}
 
@@ -194,7 +193,7 @@
 			}, function(err) {
 				console.log(err);
 			});
-		}
+		};
 	}
 
 })();
