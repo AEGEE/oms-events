@@ -56,7 +56,7 @@ module.exports = function() {
 			.send({
 				name: "Develop Yourself 4",
 				starts: "2017-12-11 15:00",
-				ends: "2017-12-14 12:00",
+				ends: "2017-12-14 12:00"
 			})
 			.end(function(err, res) {
 				res.should.have.status(201);
@@ -107,11 +107,11 @@ module.exports = function() {
 				application_fields: [
 					{
 						name: "What is the greatest local",
-						description: "Tell something about which AEGEE-Local is the best",
+						description: "Tell something about which AEGEE-Local is the best"
 					},
 					{
 						name: "What is the meaning of life",
-						description: "Please be concise",
+						description: "Please be concise"
 					}
 				],
 				application_status: "closed"
@@ -192,5 +192,5 @@ module.exports = function() {
 
 				done();
 			});
-	})
-}
+	});
+};

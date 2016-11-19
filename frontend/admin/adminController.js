@@ -30,7 +30,7 @@
 							}
 						});
 					}
-				}
+				};
 			}
 		]);
 
@@ -122,7 +122,7 @@
 		$scope.event.application_fields = [];
 		$scope.newfield = '';
 		$scope.newevent = true;
-		$scope.neworganizer = {}
+		$scope.neworganizer = {};
 
 
 		// Add callbacks to handle application field changes
@@ -130,11 +130,11 @@
 			if($scope.newfield)
 				$scope.event.application_fields.push({name: $scope.newfield});
 			$scope.newfield = '';
-		}
+		};
 		$scope.removeApplicationField = function(index) {
 			if($scope.event.application_fields && $scope.event.application_fields.length > index)
 				$scope.event.application_fields.splice(index, 1);
-		}
+		};
 
 		var ticketcount = 0;
 		$scope.fetchNames = function(query) {
@@ -155,15 +155,15 @@
 					console.log($scope.neworganizer.proposals);
 				}
 			});
-		}
+		};
 		$scope.addOrganizer = function(organizer) {
 			$scope.event.organizers.push(organizer);
 			$scope.neworganizer.query = '';
-		}
+		};
 		$scope.removeOrganizer = function(index) {
 			if($scope.event.organizers && $scope.event.organizers.length > index)
 				$scope.event.organizers.splice(index, 1);
-		}
+		};
 
 		// If no route params are given, the user wants to create a new event -> Post
 		$scope.submitForm = function() {
@@ -176,7 +176,7 @@
 					serverMessage.assign($scope, err.data.errors[attr].message);
 				}
 			});
-		}
+		};
 
 		// Load data from server, if eventid specified
 		// Also use another submit message
@@ -192,7 +192,7 @@
 					$state.go('app.events');
 				}, function(err) {
 					console.log(err);
-				})
+				});
 			};
 
 			// Add callbacks to request approval
@@ -203,7 +203,7 @@
 					else
 						$state.reload();
 				});
-			}
+			};
 
 			// Edit the event with a put
 			$scope.submitForm = function() {
@@ -217,8 +217,8 @@
 						serverMessage.assign($scope, err.data.errors[attr].message);
 					}
 				});
-			}
-			
+			};
+
 			// Get the current event status
 			$http.get(resourceURL).success( function(response) {
 				$scope.event = response;
@@ -266,7 +266,7 @@
 				default:
 					return 'active';
 			}
-		}
+		};
 
 		$scope.showModal = function(application) {
 			// Loop through application fields and assign them to our model
@@ -283,7 +283,7 @@
 
 			$scope.application = application;
 			$('#applicationModal').modal('show');
-		}
+		};
 
 		$scope.changeState = function(application, newState) {
 			// Store the change
@@ -294,10 +294,10 @@
 						return true;
 					}
 					return false;
-				})
+				});
 				$('#applicationModal').modal('hide');
 			});
-		}
+		};
 	}
 
 	function ApproveEventsController($scope, $http) {
@@ -317,8 +317,7 @@
 	                    time: '',
 	                    class_name: 'my-sticky-class'
 	                });
-				}
-				else {
+				} else {
 					$.gritter.add({
 	                    title: 'Event reset',
 	                    text: event.name + 'has been sent to draft again, the organizers will edit it',
@@ -328,14 +327,14 @@
 	                });
 				}
 			});
-		}
+		};
 	}
 
 	function OrganizersController($scope, $http, $stateParams) {
 		$scope.setSearch = function(local) {
 			if(local) $scope.search = {antenna_id: local.foreign_id};
 			else $scope.search = {};
-		}
+		};
 
 		$http.get(apiUrl + 'single/' + $stateParams.id + '/organizers').success(function(res) {
 			$scope.organizers = res;
@@ -398,7 +397,7 @@
 				su_admin: "",
 				statutory_admin: "",
 				non_statutory_admin: "",
-				super_admin: "",
+				super_admin: ""
 			}};
 
 			if($scope.su_admin) data.roles.su_admin = $scope.su_admin.id;
@@ -410,7 +409,7 @@
 			$http.put(apiUrl + 'roles', data).success(function(response) {
 				alert("Saved successfully");
 			});
-		}
+		};
 	}
 })();
 

@@ -63,7 +63,7 @@ module.exports = function() {
 			.put('/single/' + events.event1.id)
 			.set('X-Auth-Token', 'foobar')
 			.send({
-				description: "some new description",
+				description: "some new description"
 			})
 			.end(function(err, res) {
 				res.should.have.status(200);
@@ -76,7 +76,7 @@ module.exports = function() {
 			.put('/single/' + events.event1.id)
 			.set('X-Auth-Token', 'foobar')
 			.send({
-				description: "some new description",
+				description: "some new description"
 			})
 			.end(function(err, res) {
 				chai.request(server)
@@ -94,7 +94,7 @@ module.exports = function() {
 			.put('/single/' + events.event1.id)
 			.set('X-Auth-Token', 'foobar')
 			.send({
-				status: 'approved',
+				status: 'approved'
 			})
 			.end(function(err, res) {
 				chai.request(server)
@@ -137,9 +137,9 @@ module.exports = function() {
 						organizers: [
 							{
 								foreign_id: "vincent.vega",
-								role: "full",
+								role: "full"
 							}
-						],
+						]
 					})
 					.end(function(err, res) {
 						Event.findById(events.event1.id).exec(function(err, res) {
@@ -163,7 +163,7 @@ module.exports = function() {
 							{
 								foreign_id: "vincent.vega"
 							}
-						],
+						]
 					})
 					.end(function(err, res) {
 						Event.findById(events.event1.id).exec(function(err, res) {
@@ -206,4 +206,4 @@ module.exports = function() {
 					});
 			});
 	});
-}
+};
