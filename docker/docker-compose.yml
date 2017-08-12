@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+
+    mongodb:
+        image: mongo:latest
+        expose:
+            - "27017"
+        volumes:
+            - mongodb:/data/db
+    omsevents:
+        image: aegee/omsevents:dev
+        volumes:
+            - omsevents_media:/usr/app/media
+            - "./oms-events:/usr/app/oms-events"
+            - shared:/usr/shared:ro
+        links:
+            - mongodb
+        expose:
+            - "8082"
+        labels:
+            - "traefik.backend=omsevents"
+            - "traefik.port=8082"
+            - "traefik.frontend.rule=HostRegexp:{domain:[a-z]+};PathPrefix:/services/omsevents/api;PathPrefixStrip:/services/omsevents/api"
+            - "traefik.frontend.priority=110"
+            - "traefik.enable=true"
+            - "registry.categories=(events, 10);(notifications, 10)"
+            - "registry.servicename=omsevents"
+
+volumes:
+    omsevents_media:
+        driver: "local"
+    shared:
+        driver: "local"
