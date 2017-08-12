@@ -1,14 +1,11 @@
-process.env.NODE_ENV = 'test';
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const fs = require('fs-extra');
-const server = require('../lib/server.js');
-const db = require('./populate-db.js');
-const config = require('../lib/config/config.js');
+const server = require('../../lib/server.js');
+const db = require('../scripts/populate-db.js');
+const config = require('../../lib/config/config.js');
 
 const should = chai.should();
-
 chai.use(chaiHttp);
 
 describe('File upload', () => {
@@ -52,7 +49,6 @@ describe('File upload', () => {
         res.should.be.a('object');
 
         res.body.success.should.be.false;
-        res.body.should.have.property('errors');
         res.body.should.have.property('message');
 
         done();
@@ -70,7 +66,6 @@ describe('File upload', () => {
         res.should.be.a('object');
 
         res.body.success.should.be.false;
-        res.body.should.have.property('errors');
         res.body.should.have.property('message');
 
         done();
@@ -87,7 +82,6 @@ describe('File upload', () => {
         res.should.be.a('object');
 
         res.body.success.should.be.false;
-        res.body.should.have.property('errors');
         res.body.should.have.property('message');
 
         done();
@@ -105,7 +99,7 @@ describe('File upload', () => {
         res.should.be.a('object');
 
         res.body.success.should.be.true;
-        res.body.should.have.property('head_image');
+        res.body.should.have.property('data');
 
         done();
       });

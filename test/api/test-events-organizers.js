@@ -1,10 +1,8 @@
-process.env.NODE_ENV = 'test';
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../lib/server.js');
-const Event = require('../lib/models/Event');
-const db = require('./populate-db');
+const server = require('../../lib/server.js');
+const Event = require('../../lib/models/Event');
+const db = require('../scripts/populate-db');
 
 const should = chai.should();
 chai.use(chaiHttp);

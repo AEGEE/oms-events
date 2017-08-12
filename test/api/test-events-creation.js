@@ -1,9 +1,7 @@
-process.env.NODE_ENV = 'test';
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../lib/server.js');
-const db = require('./populate-db.js');
+const server = require('../../lib/server.js');
+const db = require('../scripts/populate-db.js');
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -28,6 +26,7 @@ describe('Events creation', () => {
         name: 'Develop Yourself 4',
         starts: '2017-12-11 15:00',
         ends: '2017-12-14 12:00',
+        type: 'non-statutory',
       })
       .end((err, res) => {
         res.should.have.status(403);
@@ -44,33 +43,34 @@ describe('Events creation', () => {
         name: 'Develop Yourself 4',
         starts: '2017-12-11 15:00',
         ends: '2017-12-14 12:00',
+        type: 'non-statutory',
       })
-      .end(function (err, res) {
+      .end((err, res) => {
         res.should.have.status(201);
         res.should.be.json;
         res.should.be.a('object');
 
         res.body.success.should.be.true;
-        res.body.event.should.have.property('_id');
-        res.body.event.should.have.property('name');
-        res.body.event.should.have.property('starts');
-        res.body.event.should.have.property('ends');
-        res.body.event.should.have.property('application_status');
-        res.body.event.should.have.property('max_participants');
-        res.body.event.should.have.property('status');
-        res.body.event.should.have.property('type');
-        res.body.event.should.have.property('organizing_locals');
-        res.body.event.should.have.property('description');
-        res.body.event.should.have.property('application_fields');
-        res.body.event.should.have.property('organizers');
-        res.body.event.should.have.property('applications');
+        res.body.data[0].should.have.property('_id');
+        res.body.data[0].should.have.property('name');
+        res.body.data[0].should.have.property('starts');
+        res.body.data[0].should.have.property('ends');
+        res.body.data[0].should.have.property('application_status');
+        res.body.data[0].should.have.property('max_participants');
+        res.body.data[0].should.have.property('status');
+        res.body.data[0].should.have.property('type');
+        res.body.data[0].should.have.property('organizing_locals');
+        res.body.data[0].should.have.property('description');
+        res.body.data[0].should.have.property('application_fields');
+        res.body.data[0].should.have.property('organizers');
+        res.body.data[0].should.have.property('applications');
 
         // Check auto-filled fields
-        res.body.event.status.name.should.equal('Draft');
-        res.body.event.type.should.equal('non-statutory');
-        res.body.event.application_status.should.equal('closed');
-        res.body.event.application_fields.should.have.lengthOf(0);
-        res.body.event.max_participants.should.equal(0);
+        res.body.data[0].status.name.should.equal('Draft');
+        res.body.data[0].type.should.equal('non-statutory');
+        res.body.data[0].application_status.should.equal('closed');
+        res.body.data[0].application_fields.should.have.lengthOf(0);
+        res.body.data[0].max_participants.should.equal(0);
 
         // application deadline optional when application closed
         //res.body.should.have.property('application_deadline');
@@ -78,7 +78,7 @@ describe('Events creation', () => {
       });
   });
 
-  it('should create a new event on exhausive sane / POST', function (done) {
+  it('should create a new event on exhausive sane / POST', (done) => {
     chai.request(server)
       .post('/')
       .set('X-Auth-Token', 'foobar')
@@ -86,6 +86,7 @@ describe('Events creation', () => {
         name: 'Develop Yourself 4',
         starts: '2017-12-11 15:00',
         ends: '2017-12-14 12:00',
+        type: 'non-statutory',
         description: 'A training event to boost your self-confidence and teamworking skills',
         organizing_locals: [{ foreign_id: 'AEGEE-Dresden' }],
         type: 'non-statutory',
@@ -109,25 +110,25 @@ describe('Events creation', () => {
         res.should.be.a('object');
 
         res.body.success.should.be.true;
-        res.body.event.should.have.property('_id');
-        res.body.event.should.have.property('name');
-        res.body.event.should.have.property('starts');
-        res.body.event.should.have.property('ends');
-        res.body.event.should.have.property('application_deadline');
-        res.body.event.should.have.property('application_status');
-        res.body.event.should.have.property('max_participants');
-        res.body.event.should.have.property('status');
-        res.body.event.should.have.property('type');
-        res.body.event.should.have.property('organizing_locals');
-        res.body.event.should.have.property('description');
-        res.body.event.should.have.property('application_fields');
-        res.body.event.should.have.property('organizers');
-        res.body.event.should.have.property('applications');
+        res.body.data[0].should.have.property('_id');
+        res.body.data[0].should.have.property('name');
+        res.body.data[0].should.have.property('starts');
+        res.body.data[0].should.have.property('ends');
+        res.body.data[0].should.have.property('application_deadline');
+        res.body.data[0].should.have.property('application_status');
+        res.body.data[0].should.have.property('max_participants');
+        res.body.data[0].should.have.property('status');
+        res.body.data[0].should.have.property('type');
+        res.body.data[0].should.have.property('organizing_locals');
+        res.body.data[0].should.have.property('description');
+        res.body.data[0].should.have.property('application_fields');
+        res.body.data[0].should.have.property('organizers');
+        res.body.data[0].should.have.property('applications');
 
-        res.body.event.application_fields.should.have.lengthOf(2);
+        res.body.data[0].application_fields.should.have.lengthOf(2);
 
         // Not yet implemented
-        //res.body.organizers.should.have.lengthOf(1);
+        // res.body.organizers.should.have.lengthOf(1);
 
         done();
       });
@@ -141,6 +142,7 @@ describe('Events creation', () => {
         name: 'Develop Yourself 4',
         starts: '2017-12-11 15:00',
         ends: '2017-12-14 12:00',
+        type: 'non-statutory',
         organizers: [
           {
             foreign_id: 'eve.mallory',
@@ -155,7 +157,7 @@ describe('Events creation', () => {
         ],
       })
       .end((err, res) => {
-        res.body.event.applications.should.have.lengthOf(0);
+        res.body.data[0].applications.should.have.lengthOf(0);
 
         // Not implemented yet
         // res.body.organizers.should.have.lengthOf(1);
@@ -172,6 +174,7 @@ describe('Events creation', () => {
       .send({
         starts: '2015-12-11 15:00',
         ends: 'sometime, dunno yet',
+        type: 'non-statutory',
       })
       .end((err, res) => {
         res.body.success.should.be.false;
@@ -179,6 +182,26 @@ describe('Events creation', () => {
         res.body.errors.should.have.property('ends');
         res.body.errors.should.have.property('name');
 
+        done();
+      });
+  });
+
+  it('should fail if there\'s no event type specified', (done) => {
+    chai.request(server)
+      .post('/')
+      .set('X-Auth-Token', 'foobar')
+      .send({
+        name: 'Develop Yourself 4',
+        starts: '2017-12-11 15:00',
+        ends: '2017-12-14 12:00',
+      })
+      .end((err, res) => {
+        res.should.have.status(409);
+        res.should.be.json;
+        res.should.be.a('object');
+
+        res.body.success.should.be.false;
+        res.body.should.have.property('message');
         done();
       });
   });
@@ -199,7 +222,6 @@ describe('Events creation', () => {
         res.should.be.a('object');
 
         res.body.success.should.be.false;
-        res.body.should.have.property('errors');
         res.body.should.have.property('message');
         done();
       });

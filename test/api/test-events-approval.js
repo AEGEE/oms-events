@@ -1,10 +1,8 @@
-process.env.NODE_ENV = 'test';
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../lib/server.js');
-const db = require('./populate-db.js');
-const Event = require('../lib/models/Event');
+const server = require('../../lib/server.js');
+const db = require('../scripts/populate-db.js');
+const Event = require('../../lib/models/Event');
 
 const expect = chai.expect;
 chai.use(chaiHttp);
@@ -39,7 +37,7 @@ describe('Events approval', () => {
         expect(res).to.be.json;
         expect(res).to.be.a('object');
 
-        const ids = res.body.map(e => e.id);
+        const ids = res.body.data.map(e => e.id);
         expect(ids.find(id => event._id.equals(id))).to.be.ok;
 
         done();
@@ -59,7 +57,7 @@ describe('Events approval', () => {
         expect(res).to.be.json;
         expect(res).to.be.a('object');
 
-        const ids = res.body.map(e => e.id);
+        const ids = res.body.data.map(e => e.id);
         expect(ids.find(id => event._id.equals(id))).to.not.exist;
         done();
       });
@@ -111,7 +109,6 @@ describe('Events approval', () => {
         expect(res).to.be.a('object');
 
         expect(res.body.success).to.be.false;
-        expect(res.body).to.have.property('errors');
         expect(res.body).to.have.property('message');
 
         Event.findOne({ _id: event._id })
@@ -140,7 +137,6 @@ describe('Events approval', () => {
         expect(res).to.be.a('object');
 
         expect(res.body.success).to.be.false;
-        expect(res.body).to.have.property('errors');
         expect(res.body).to.have.property('message');
 
         Event.findOne({ _id: event._id })

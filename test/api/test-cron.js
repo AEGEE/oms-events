@@ -1,10 +1,8 @@
-process.env.NODE_ENV = 'test';
-
 const chai = require('chai');
 const tk = require('timekeeper');
-const cron = require('../lib/cron');
-const db = require('./populate-db');
-const Event = require('../lib/models/Event');
+const cron = require('../../lib/cron');
+const db = require('../scripts/populate-db');
+const Event = require('../../lib/models/Event');
 
 const should = chai.should();
 
