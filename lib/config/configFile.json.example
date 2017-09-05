@@ -25,7 +25,8 @@
 		"enable_user_caching": true,
 		"media_dir": "/usr/app/media",
 		"media_url": "/frontend/media",
-		"bugsnagKey": "CHANGEME"
+		"bugsnagKey": "CHANGEME",
+		"global_board_circle": "1"
 	},
 	"development": {
 
