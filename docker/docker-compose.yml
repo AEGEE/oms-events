@@ -6,7 +6,7 @@ services:
         image: mongo:latest
         expose:
             - "27017"
-        volumes:
+        volumes: #why not simply - mongodb:/data/db ?
             - type: volume
               source: mongodb
               target: /data/db
@@ -15,12 +15,10 @@ services:
 
     oms-events:
         build:
-            context: ./$PATH_OMS_EVENTS/oms-events
-            dockerfile: ./Dockerfile.dev
+            context: ./$PATH_OMS_EVENTS/..
         image: aegee/oms-events:dev
         volumes:
             - oms-events-media:/usr/app/media
-            - ./$PATH_OMS_EVENTS/../:/usr/app/src
             - shared:/usr/app/shared:ro
         links:
             - mongodb
