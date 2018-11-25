@@ -6,6 +6,7 @@ services:
         image: mongo:4.0.4-xenial
         expose:
             - "27017"
+        restart: always
         volumes: #why not simply - mongodb:/data/db ?
             - type: volume
               source: mongodb
@@ -17,6 +18,7 @@ services:
         build:
             context: ./$PATH_OMS_EVENTS/..
         image: aegee/oms-events:dev
+        restart: on-failure
         volumes:
             - oms-events-media:/usr/app/media
             - shared:/usr/app/shared:ro
