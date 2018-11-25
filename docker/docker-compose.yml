@@ -3,7 +3,7 @@ version: '3.2'
 ### mongodb Container #######################################
 services:
     mongodb:
-        image: mongo:latest
+        image: mongo:4.0.4-xenial
         expose:
             - "27017"
         volumes: #why not simply - mongodb:/data/db ?
