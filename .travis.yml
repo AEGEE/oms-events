@@ -26,3 +26,11 @@ script:
   - npm audit
   - npm test
   - codecov
+
+# after_script:
+#   - sudo docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+#   - sudo docker tag aegee/oms-events aegee/oms-events:${TRAVIS_COMMIT}
+#   - sudo docker push aegee/oms-events:${TRAVIS_COMMIT}
+#   - sudo docker tag aegee/oms-events:${TRAVIS_COMMIT} aegee/oms-events:latest
+#   - sudo docker push aegee/oms-events:latest
+#   #if: tag

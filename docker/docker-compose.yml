@@ -1,6 +1,5 @@
 version: '3.2'
-### OMS STATUTORY     #######################################
-### mongodb Container #######################################
+### OMS EVENTS   #######################################
 services:
     postgres-oms-events:
         restart: always
@@ -18,7 +17,7 @@ services:
         build:
             context: ./$PATH_OMS_EVENTS/oms-events
             dockerfile: ./Dockerfile.dev
-        image: aegee/oms-events:dev
+        image: aegee/oms-events
         volumes:
             - oms-events-media:/usr/app/media
             - ./$PATH_OMS_EVENTS/../:/usr/app/src
