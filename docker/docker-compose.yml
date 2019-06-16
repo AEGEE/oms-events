@@ -18,7 +18,7 @@ services:
         build:
             context: ./$PATH_OMS_EVENTS/..
             dockerfile: ./docker/oms-events/Dockerfile
-            image: aegee/oms-events:dev
+        image: aegee/oms-events:dev
         volumes:
             - oms-events-media:/usr/app/media
             - ./$PATH_OMS_EVENTS/../:/usr/app/src
