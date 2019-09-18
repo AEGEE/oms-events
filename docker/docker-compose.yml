@@ -30,6 +30,12 @@ services:
         environment:
             BUGSNAG_KEY: 6f6a7c00507fceca0818c48405dbd2a6
             PG_PASSWORD: ${PW_POSTGRES}
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "http://localhost/healthcheck"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
         labels:
             - "traefik.backend=oms-events"
             - "traefik.port=8084"
@@ -44,3 +50,8 @@ volumes:
         driver: "local"
     shared:
         driver: "local"
+
+networks:
+    default:
+        external:
+            name: OMS
