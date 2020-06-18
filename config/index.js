@@ -19,7 +19,7 @@ const config = {
             }
         },
         mailer: {
-            url: 'http:/mailer',
+            url: 'http://mailer',
             port: 4000
         },
         new_event_notifications: [
