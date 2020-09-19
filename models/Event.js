@@ -356,9 +356,9 @@ const Event = sequelize.define('event', {
         allowNull: false,
         defaultValue: 0,
         validate: {
-            isNumeric: {msg: 'Number of meals per day should be valid.'},
-            min: {args: [0], msg: 'Number of meals per day cannot be negative'},
-            max: {args: [4], msg: 'You cannot offer more than 4 meals per day'},
+            isNumeric: { msg: 'Number of meals per day should be valid.' },
+            min: { args: [0], msg: 'Number of meals per day cannot be negative' },
+            max: { args: [4], msg: 'You cannot offer more than 4 meals per day' },
         },
     },
     accommodation_type: {
@@ -366,7 +366,7 @@ const Event = sequelize.define('event', {
         allowNull: false,
         defaultValue: '',
         validate: {
-            notEmpty: {msg: 'The type of accommodation should be set. Use "none" if you do not provide any'},
+            notEmpty: { msg: 'The type of accommodation should be set. Use "none" if you do not provide any' },
         }
     },
 },
