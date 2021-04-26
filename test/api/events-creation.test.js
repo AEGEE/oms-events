@@ -772,10 +772,7 @@ describe('Events creation', () => {
     });
 
     it('should return 422 if URL is not unique', async () => {
-        await generator.createEvent({
-            organizing_bodies: [{ body_id: user.bodies[0].id }],
-            url: 'non-unique-url'
-        });
+        await generator.createEvent({ url: 'non-unique-url' });
 
         const event = generator.generateEvent({
             organizing_bodies: [{ body_id: user.bodies[0].id }],
